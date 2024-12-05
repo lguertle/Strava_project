@@ -1,0 +1,23 @@
+.strava-connect {
+    display: flex;
+    align-items: center;
+}
+
+.strava-connect button {
+    padding: 10px 20px;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.strava-connect button:hover {
+    background-color: #21a1f1;
+}
+
+.strava-connect p {
+    margin-left: 10px;
+    color: red;
+}
