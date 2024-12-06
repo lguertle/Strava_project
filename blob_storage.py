@@ -7,6 +7,9 @@ from flask_cors import CORS
 from flask import Flask, request, redirect, jsonify, send_from_directory
 from azure.storage.blob import BlobServiceClient
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__, static_folder=os.path.abspath('strava-project/build'), static_url_path='')
 CORS(app)
@@ -14,11 +17,19 @@ CORS(app)
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Replace these with your actual values
-client_id = "138104"
-client_secret = "44b79cd9346f3ba7bc0d4388583bf4474d7b6196"
-redirect_uri = "http://localhost:5000/oauth/callback"
-connection_string = "DefaultEndpointsProtocol=https;AccountName=stravastorageproject;AccountKey=r4v4kw6itdfqwkzuneRR8FYX2dOI88hS+/4r9WlWAT6LCz3iwbLpO7+5HwHpNLRbOmT73IQD3plA+AStz/VXPw==;EndpointSuffix=core.windows.net"
+client_id = os.getenv('CLIENT_ID')
+client_secret = os.getenv('CLIENT_SECRET')
+redirect_uri = os.getenv('REDIRECT_URI')
+connection_string = os.getenv('CONNECTION_STRING')
+mapbox_access_token = os.getenv('MAPBOX_ACCESS_TOKEN')
+
+logging.info(f"CLIENT_ID: {client_id}")
+logging.info(f"CLIENT_SECRET: {client_secret}")
+logging.info(f"REDIRECT_URI: {redirect_uri}")
+logging.info(f"CONNECTION_STRING: {connection_string}")
+logging.info(f"MAPBOX_ACCESS_TOKEN: {mapbox_access_token}")
+
+# Define container name
 container_name = "strava-data"
 
 # Serve the React app

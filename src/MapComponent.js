@@ -6,7 +6,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './MapComponent.css';
 import polyline from '@mapbox/polyline';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibGF1Z3VyIiwiYSI6ImNtMmo1OW5zYjAyMDUya3M3NHh1b3I5YTYifQ.6YKGHOMLAtNPd2H_q1gfwA'; // Replace with your Mapbox token
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const MapComponent = ({ selectedActivity }) => {
     const mapContainerRef = useRef(null);
