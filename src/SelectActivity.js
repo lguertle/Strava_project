@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SelectActivity.css';
+import HeartRateChart from './HeartRateChart';
 
 const SelectActivity = ({ onSelectActivity }) => {
     const [activities, setActivities] = useState([]);
@@ -46,6 +47,16 @@ const SelectActivity = ({ onSelectActivity }) => {
 
     const totalPages = Math.ceil(filteredActivities.length / activitiesPerPage);
 
+    const formatDistance = (distance) => {
+        return (distance / 1000).toFixed(2) + ' km';
+    };
+
+    const formatTime = (time) => {
+        const hours = Math.floor(time / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        return `${hours}h ${minutes}m`;
+    };
+
     return (
         <div className="select-activity-container">
             <h2>Select an Activity</h2>
@@ -75,6 +86,9 @@ const SelectActivity = ({ onSelectActivity }) => {
                 <button onClick={prevPage} disabled={currentPage === 1}>
                     &lt;
                 </button>
+                <span className="page-info">
+                    Page {currentPage} of {totalPages}
+                </span>
                 <button onClick={nextPage} disabled={currentPage === totalPages}>
                     &gt;
                 </button>
@@ -86,9 +100,10 @@ const SelectActivity = ({ onSelectActivity }) => {
                 <div className="selected-activity">
                     <h3>Selected Activity</h3>
                     <p>Title: {selectedActivity.name}</p>
-                    <p>Distance: {selectedActivity.distance} meters</p>
-                    <p>Moving Time: {selectedActivity.moving_time} seconds</p>
+                    <p>Distance: {formatDistance(selectedActivity.distance)}</p>
+                    <p>Moving Time: {formatTime(selectedActivity.moving_time)}</p>
                     <p>Elevation Gain: {selectedActivity.total_elevation_gain} meters</p>
+                    <HeartRateChart activityId={selectedActivity.id} />
                 </div>
             )}
         </div>

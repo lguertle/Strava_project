@@ -94,45 +94,61 @@ def fetch_activities():
     }
 
     all_activities = []
-    page = 1
-    per_page = 30
+    all_heart_rate_data = {}
+    per_page = 20  # Limit to the last 20 activities
 
-    while True:
-        params = {
-            "page": page,
-            "per_page": per_page
-        }
+    params = {
+        "per_page": per_page
+    }
 
-        response = requests.get(activities_url, headers=headers, params=params)
-        
-        if response.status_code != 200:
-            logging.error(f"Failed to fetch activities: {response.text}")
-            return f"Failed to fetch activities: {response.text}"
+    response = requests.get(activities_url, headers=headers, params=params)
+    
+    if response.status_code != 200:
+        logging.error(f"Failed to fetch activities: {response.text}")
+        return f"Failed to fetch activities: {response.text}"
 
-        activities = response.json()
-        if not activities:
-            break
+    activities = response.json()
+    all_activities.extend(activities)
 
-        all_activities.extend(activities)
-        page += 1
+    # Fetch heart rate data for each activity
+    for activity in activities:
+        activity_id = activity['id']
+        heart_rate_url = f"https://www.strava.com/api/v3/activities/{activity_id}/streams?keys=heartrate"
+        hr_response = requests.get(heart_rate_url, headers=headers)
+        if hr_response.status_code == 200:
+            heart_rate_data = hr_response.json()
+            all_heart_rate_data[activity_id] = heart_rate_data
 
     # Convert all activities data to JSON format
     activity_json = json.dumps(all_activities)
-    logging.info(f"Fetched {len(all_activities)} activities.")
+    heart_rate_json = json.dumps(all_heart_rate_data)
 
     # Upload activity data to Azure Blob Storage
     try:
         blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-        blob_name = "activities.json"  # Fixed blob name to overwrite the existing blob
-
-        blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob="activities.json")
         blob_client.upload_blob(activity_json, overwrite=True)
-        logging.info(f"Uploaded activities to Azure Blob Storage: {blob_name}")
+        logging.info("Uploaded activities to Azure Blob Storage")
+
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob="heart_rate_data.json")
+        blob_client.upload_blob(heart_rate_json, overwrite=True)
+        logging.info("Uploaded heart rate data to Azure Blob Storage")
     except Exception as e:
-        logging.error(f"Failed to upload activities to Azure Blob Storage: {str(e)}")
-        return f"Failed to upload activities to Azure Blob Storage: {str(e)}"
+        logging.error(f"Failed to upload data to Azure Blob Storage: {str(e)}")
+        return f"Failed to upload data to Azure Blob Storage: {str(e)}"
 
     return redirect('/')
+
+@app.route('/get-heart-rate-data', methods=['GET'])
+def get_heart_rate_data():
+    try:
+        blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob="heart_rate_data.json")
+        heart_rate_data = blob_client.download_blob().readall()
+        return jsonify(json.loads(heart_rate_data))
+    except Exception as e:
+        logging.error(f"Failed to get heart rate data from Azure Blob Storage: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/get-activities', methods=['GET'])
 def get_activities():

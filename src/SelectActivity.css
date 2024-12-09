@@ -4,7 +4,7 @@
     border-radius: 8px;
     background-color: #f7f8eb;
     width: 600px; /* Fixed width */
-    height: 500px; /* Fixed height */
+    height: 600px; /* Fixed height */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -47,6 +47,9 @@
     cursor: pointer;
     background-color: #fdfdfd;
     transition: background-color 0.3s;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Display ellipsis (...) for overflowed text */
 }
 
 .select-activity-container li:hover {
@@ -57,6 +60,12 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+.select-activity-container .pagination .page-info {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #333;
 }
 
 .select-activity-container .pagination button {
@@ -79,7 +88,7 @@
 }
 
 .select-activity-container .selected-activity {
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
