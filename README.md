@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# KOM Hunter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application that integrates with Strava to visualize and analyze your cycling activities. Built with React and Flask, this application allows you to view your activities on an interactive map, analyze heart rate data, and filter through your Strava history.
 
-## Available Scripts
+![Demo](docs/assets/demo.gif)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Strava Integration**: Connect seamlessly with your Strava account to access your activities
+- **Interactive Map**: Visualize your activities on a Mapbox-powered map with customizable styles
+- **Activity Filtering**: Filter activities by type (Ride, Run, Virtual Ride, etc.)
+- **Heart Rate Analysis**: View heart rate data for selected activities
+- **Responsive Design**: Clean and intuitive interface that works across different screen sizes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: 
+  - React
+  - Mapbox GL JS
+  - Chart.js for data visualization
+  - Axios for API requests
 
-### `npm test`
+- **Backend**:
+  - Flask
+  - Azure Blob Storage for data persistence
+  - Strava API integration
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js and npm
+- Python 3.x
+- Azure Storage account
+- Strava API credentials
+- Mapbox API key
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+```bash
+git clone https://github.com/lguertle/Strava_project.git
+cd Strava_project
 
-### `npm run eject`
+2. Install frontend dependencies:
+```bash
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Install backend dependencies:
+```bash
+pip install -r requirements.txt
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Create a .env file in the root directory:
+```bash
+CLIENT_ID=your_strava_client_id
+CLIENT_SECRET=your_strava_client_secret
+REDIRECT_URI=http://localhost:5000/oauth/callback
+CONNECTION_STRING=your_azure_storage_connection_string
+REACT_APP_MAPBOX_ACCESS_TOKEN=your_mapbox_access_token
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running the Application
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Start the Flask backend:
+```bash
+python blob_storage.py
 
-## Learn More
+2. Start the React frontend:
+```bash
+npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Open your browser and navigate to http://localhost:3000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
 
-### Code Splitting
+1. **Connect Your Strava Account**
+   - Click "Connect to Strava" to authorize the application
+   - Grant necessary permissions to access your activity data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. **View Your Activities**
+   - Activities are automatically fetched and displayed in the sidebar
+   - Filter activities by type (Ride, Run, etc.)
 
-### Analyzing the Bundle Size
+3. **Explore Activities on the Map**
+   - Select any activity from the sidebar to view its route
+   - The map will automatically zoom to fit the selected route
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. **Map Controls**
+   - 🗺️ **View Options**
+     - Toggle between classic and satellite map styles using the "Map Style" menu
+   - 🔍 **Navigation**
+     - Use the search bar to find specific locations
+     - Click the locate icon to find your current position
+   - 📊 **Data Visualization**
+     - View heart rate data charts for selected activities
+     - Track elevation profiles along your routes
 
-### Making a Progressive Web App
+5. **Data Analysis**
+   - Analyze heart rate zones for each activity
+   - View detailed statistics including distance, time, and elevation gain
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
+This project is released under the MIT License.
 
-### Advanced Configuration
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contact
+Created by Laurent Gürtler.
+For inquiries, please email at laurent.guertler@gmail.com.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgments
+- Strava API for activity data
+- Mapbox for mapping functionality
+- Chart.js for data visualization
