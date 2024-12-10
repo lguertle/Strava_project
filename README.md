@@ -38,35 +38,35 @@ A web application that integrates with Strava to visualize and analyze your cycl
 ### Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/lguertle/Strava_project.git
-cd Strava_project
+  ```bash
+  git clone https://github.com/lguertle/Strava_project.git
+  cd Strava_project
 
 2. Install frontend dependencies:
-```bash
-npm install
+  ```bash
+  npm install
 
 3. Install backend dependencies:
-```bash
-pip install -r requirements.txt
+  ```bash
+  pip install -r requirements.txt
 
 4. Create a .env file in the root directory:
-```bash
-CLIENT_ID=your_strava_client_id
-CLIENT_SECRET=your_strava_client_secret
-REDIRECT_URI=http://localhost:5000/oauth/callback
-CONNECTION_STRING=your_azure_storage_connection_string
-REACT_APP_MAPBOX_ACCESS_TOKEN=your_mapbox_access_token
+  ```bash
+  CLIENT_ID=your_strava_client_id
+  CLIENT_SECRET=your_strava_client_secret
+  REDIRECT_URI=http://localhost:5000/oauth/callback
+  CONNECTION_STRING=your_azure_storage_connection_string
+  REACT_APP_MAPBOX_ACCESS_TOKEN=your_mapbox_access_token
 
 ### Running the Application
 
 1. Start the Flask backend:
-```bash
-python blob_storage.py
+  ```bash
+  python blob_storage.py
 
 2. Start the React frontend:
-```bash
-npm start
+  ```bash
+  npm start
 
 3. Open your browser and navigate to http://localhost:3000
 
@@ -109,6 +109,6 @@ Created by Laurent Gürtler.
 For inquiries, please email at laurent.guertler@gmail.com.
 
 ## Acknowledgments
-- Strava API for activity data
-- Mapbox for mapping functionality
-- Chart.js for data visualization
+  - Strava API for activity data
+  - Mapbox for mapping functionality
+  - Chart.js for data visualization
