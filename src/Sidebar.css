@@ -1,0 +1,61 @@
+.sidebar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    background-color: #575656;
+    color: white;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure the sidebar is above other elements */
+    transition: width 0.3s ease; /* Smooth transition for width change */
+}
+
+.sidebar.retracted {
+    width: 20px; /* Retracted width */
+}
+
+.sidebar h2 {
+    margin-top: 10;
+    font-size: 1.5rem;
+    color: #f79b46;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    color: #f79b46;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    background-color: #575656;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 1001; /* Ensure the button is above the sidebar */
+    transition: right 0.3s ease; /* Smooth transition for position change */
+}
+
+.sidebar.retracted .toggle-button {
+    right: -20px; /* Adjust position when retracted */
+}

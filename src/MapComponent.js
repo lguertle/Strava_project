@@ -11,6 +11,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 const MapComponent = ({ selectedActivity }) => {
     const mapContainerRef = useRef(null);
     const mapRef = useRef(null);
+    const geocoderRef = useRef(null);
 
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -19,31 +20,31 @@ const MapComponent = ({ selectedActivity }) => {
             center: [-74.5, 40],
             zoom: 9
         });
-
+    
         mapRef.current = map;
-
+    
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
             types: 'country,region,place,postcode,locality,neighborhood',
             placeholder: 'Search for a city'
         });
-
-        if (!document.getElementById('geocoder').hasChildNodes()) {
-            geocoder.addTo('#geocoder');
+    
+        if (geocoderRef.current && !geocoderRef.current.hasChildNodes()) {
+            geocoder.addTo(geocoderRef.current);
         }
-
+    
         geocoder.on('result', (e) => {
             const coordinates = e.result.geometry.coordinates;
             map.flyTo({ center: coordinates, zoom: 12 });
-            new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
         });
-
+    
         document.getElementById('locate-icon').onclick = () => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     const userCoords = [position.coords.longitude, position.coords.latitude];
                     map.flyTo({ center: userCoords, zoom: 12 });
-                    new mapboxgl.Marker().setLngLat(userCoords).addTo(map);
+                    // Remove the line that adds the marker
+                    // new mapboxgl.Marker().setLngLat(userCoords).addTo(map);
                 }, (error) => {
                     console.error('Error finding your location: ', error);
                     alert('Unable to retrieve your location.');
@@ -128,7 +129,7 @@ const MapComponent = ({ selectedActivity }) => {
 
     return (
         <div className="map-container">
-            <div id="geocoder"></div>
+            <div id="geocoder" ref={geocoderRef}></div>
             <div id="map" ref={mapContainerRef}></div>
             <img id="locate-icon" src="/icons/location_2.png" alt="Find My Location" width="30" height="30" />
             <div id="style-toggle">Map Style</div>
