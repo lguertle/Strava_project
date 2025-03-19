@@ -2,30 +2,42 @@
   "name": "strava-project",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000/",
+  "proxy": "http://localhost:5000",
   "dependencies": {
-    "@craco/craco": "^7.1.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.3",
     "@mapbox/polyline": "^1.2.1",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@turf/turf": "^7.1.0",
-    "axios": "^1.7.8",
-    "chart.js": "^4.4.7",
-    "mapbox-gl": "^3.8.0",
-    "react": "^18.3.1",
-    "react-chartjs-2": "^5.2.0",
-    "react-dom": "^18.3.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@turf/turf": "^7.2.0",
+    "axios": "^1.8.3",
+    "chart.js": "^4.4.8",
+    "cors": "^2.8.5",
+    "daisyui": "^5.0.4",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "leaflet": "^1.9.4",
+    "mapbox-gl": "^3.10.0",
+    "mongodb": "^6.14.2",
+    "mongoose": "^8.12.1",
+    "react": "^19.0.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
+    "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.3.0",
     "react-scripts": "^5.0.1",
     "watch": "^1.0.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "cross-env PORT=3000 BROWSER=chrome react-scripts start",
+    "server": "node server/src/server.js",
+    "dev": "node kill-ports.js && concurrently \"npm run server\" \"npm run start\"",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "kill-ports": "node kill-ports.js"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +56,32 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "A web application that integrates with Strava to visualize and analyze your cycling activities. Built with React and Node.js, this application allows you to view your activities on an interactive map, analyze heart rate data, and filter through your Strava history.",
+  "main": "server/src/server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "kill-port": "^2.0.1",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.4.31",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^10.1.5",
+    "tailwindcss": "^3.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lguertle/Strava_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lguertle/Strava_project/issues"
+  },
+  "homepage": "/"
 }

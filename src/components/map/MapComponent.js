@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import './MapComponent.css';
+// CSS imports are now handled centrally in src/map-libraries.css
 import polyline from '@mapbox/polyline';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -128,19 +126,45 @@ const MapComponent = ({ selectedActivity }) => {
     }, [selectedActivity]);
 
     return (
-        <div className="map-container">
-            <div id="geocoder" ref={geocoderRef}></div>
-            <div id="map" ref={mapContainerRef}></div>
-            <img id="locate-icon" src="/icons/location_2.png" alt="Find My Location" width="30" height="30" />
-            <div id="style-toggle">Map Style</div>
-            <div id="style-menu">
-                <div>
-                    <input type="radio" id="classic-style" name="map-style" value="classic" defaultChecked />
-                    <label htmlFor="classic-style">Classic Map</label>
+        <div className="relative w-full h-screen p-1">
+            <div id="geocoder" ref={geocoderRef} className="z-10 m-2.5"></div>
+            <div id="map" ref={mapContainerRef} className="w-full h-full"></div>
+            <img 
+                id="locate-icon" 
+                src="/icons/location_2.png" 
+                alt="Find My Location" 
+                className="absolute top-20 left-5 bg-white rounded-full p-2.5 cursor-pointer shadow-md w-[30px] h-[30px]" 
+            />
+            <div 
+                id="style-toggle"
+                className="absolute top-[87px] left-20 bg-white p-2.5 rounded-md cursor-pointer shadow-md text-sm"
+            >
+                Map Style
+            </div>
+            <div 
+                id="style-menu"
+                className="absolute top-20 left-40 bg-white p-2.5 rounded-md shadow-md text-sm hidden"
+            >
+                <div className="mb-2">
+                    <input 
+                        type="radio" 
+                        id="classic-style" 
+                        name="map-style" 
+                        value="classic" 
+                        defaultChecked 
+                        className="mr-2"
+                    />
+                    <label htmlFor="classic-style" className="cursor-pointer">Classic Map</label>
                 </div>
                 <div>
-                    <input type="radio" id="satellite-style" name="map-style" value="satellite" />
-                    <label htmlFor="satellite-style">Satellite Map</label>
+                    <input 
+                        type="radio" 
+                        id="satellite-style" 
+                        name="map-style" 
+                        value="satellite" 
+                        className="mr-2"
+                    />
+                    <label htmlFor="satellite-style" className="cursor-pointer">Satellite Map</label>
                 </div>
             </div>
         </div>

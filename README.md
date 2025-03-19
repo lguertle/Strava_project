@@ -98,6 +98,65 @@ A web application that integrates with Strava to visualize and analyze your cycl
    - Analyze heart rate zones for each activity
    - View detailed statistics including distance, time, and elevation gain
 
+## Cache Status Indicators
+
+The segment analysis page now includes visual indicators to show whether segment efforts data will be served from the cache or require an API call to fetch. This helps users understand when actions might count against their Strava API rate limits.
+
+### Cache Indicators
+
+- **Green Check Badge** - Data is cached and will not require an API call
+- **Yellow Lightning Badge** - Data is not cached and will require an API call to Strava's API
+
+### Benefits
+
+- **Avoid Rate Limits**: Helps prevent hitting Strava API rate limits by making it clear which segments have cached data
+- **Better Performance**: Cached data loads faster and doesn't require API calls
+- **Transparency**: Provides visibility into data freshness and API usage
+
+### How Caching Works
+
+- **Segment Efforts**: Cached for each segment after the first fetch
+- **Force Refresh**: You can always force a refresh of data by using the refresh options menu
+
+## Repository Structure
+
+The project is organized into the following main directories:
+
+- **src/**: Contains the React frontend code
+  - **components/**: React components organized by feature
+  - **utils/**: Utility functions and helpers
+  - **styles/**: CSS and styling files
+  
+- **server/**: Backend server code
+  - **routes/**: API endpoint handlers
+  - **services/**: Business logic and data processing
+
+- **public/**: Static assets and HTML template
+- **docs/**: Documentation and resources
+
+## Development
+
+### Testing & Utility Files
+
+This repository includes several testing and utility scripts that are excluded from Git tracking via `.gitignore`. These files are primarily used for local development, testing webhook integrations, and Strava API interactions:
+
+- Webhook testing utilities
+- API token management scripts
+- Local server configurations
+- Test data generators
+
+If you need to use these utilities, they can be obtained separately or created following the patterns described in the documentation.
+
+### Preparing for GitHub
+
+Before pushing changes to GitHub, you can run the included script to verify which files will be included/excluded:
+
+```bash
+./prepare-for-github.ps1
+```
+
+This will show you which files are ignored by Git and which ones will be included in your next commit.
+
 ## License
 This project is released under the MIT License.
 

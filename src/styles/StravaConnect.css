@@ -1,0 +1,76 @@
+.strava-connect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.strava-connect button {
+    padding: 10px 20px;
+    background-color: #FC4C02;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-width: 160px;
+}
+
+.strava-connect button:hover:not(:disabled) {
+    background-color: #E34400;
+    transform: translateY(-1px);
+}
+
+.strava-connect button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.strava-connect button.loading {
+    position: relative;
+    background-color: #E34400;
+}
+
+.strava-connect button.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    right: 10px;
+    margin-top: -8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.strava-connect .message {
+    color: #4CAF50;
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.strava-connect .error {
+    color: #dc3545;
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.strava-connect p {
+    margin-left: 15px;
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+    max-width: 300px;
+}

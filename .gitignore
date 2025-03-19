@@ -7,6 +7,49 @@
 
 # testing
 /coverage
+src/tests/
+
+# Testing utilities and scripts
+# Webhook testing utilities
+create-test-token.js
+create-webhook-token.js
+webhook-test-with-token.js
+test-webhook.js
+test-webhook-integration.js
+simulate-webhook-event.js
+webhook-server.js
+test-webhook-event.ps1
+delete-subscription.ps1
+subscribe-webhook.ps1
+check-tokens.js
+list-subscriptions.js
+check-subscriptions.ps1
+server-logs-check.js
+setup-oauth-url.js
+enhance-webhook-logging.js
+sync-token-for-webhooks.js
+kill-ports.js
+src/test-dependencies.js
+src/test-script.js
+manage-webhooks.js
+get-ngrok-url.js
+app.js.txt
+create-subscription.js
+
+# Server test files
+server/src/db-test.js
+server/src/webhook-test.js
+
+# Python files
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+db_handler.py
+check_env.py
+
+# Webhook documentation files
+WEBHOOK-*.md
 
 # production
 /build
@@ -52,3 +95,4 @@ Thumbs.db
 
 # Environment variables
 .env
+.env.development
