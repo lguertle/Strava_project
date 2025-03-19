@@ -1,6 +1,19 @@
 # KOM Hunter
 
+> **Note:** This application is currently in development. This is a first demo version with core features implemented while additional functionality is being developed.
+
 A React-based web application that integrates with Strava API to help cyclists analyze their activities and find KOM (King of the Mountain) opportunities.
+
+## Screenshots
+
+### Dashboard
+![Dashboard](docs/assets/Dashboard.png)
+
+### Activity Analytics
+![Analytics](docs/assets/Analytics.png)
+
+### Segment Analysis
+![Segments](docs/assets/Segments.png)
 
 ## Core Features
 
