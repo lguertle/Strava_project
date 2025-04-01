@@ -1,5 +1,0 @@
-{
-    "client_id": "138104",
-    "client_secret": "44b79cd9346f3ba7bc0d4388583bf4474d7b6196",
-    "redirect_uri": "http://localhost:5000/oauth/callback"
-} 
